@@ -11,8 +11,11 @@ const App = () => {
             <header>
                <h1>
                   <img src="../public/hero.png" alt="hero" />
-                  Find <span className="text-gradient">Movies</span> You'll
-                  Enjoy without The Hassle
+                  Find{" "}
+                  <span className="bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent">
+                     Movies
+                  </span>{" "}
+                  You'll Enjoy without The Hassle
                </h1>
                <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                <p className="text-white">{searchTerm}</p>
