@@ -18,9 +18,14 @@ const App = () => {
    const [movies, setMovies] = useState<any>([]);
    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-   const fetchMovies = async () => {
+   const fetchMovies = async (query: string) => {
       try {
-         const res = await fetch(`${API_BASE_URL}/discover/movie`, API_OPTIONS);
+         const res = await fetch(
+            query
+               ? `${API_BASE_URL}/search/movie?query=${query}`
+               : `${API_BASE_URL}/discover/movie`,
+            API_OPTIONS
+         );
          const data = await res.json();
          setMovies(data.results);
       } catch (error) {
@@ -31,8 +36,8 @@ const App = () => {
    };
 
    useEffect(() => {
-      fetchMovies();
-   });
+      fetchMovies(searchTerm);
+   }, [searchTerm]);
 
    return (
       <>
