@@ -45,7 +45,7 @@ const App = () => {
 
          <div className="wrapper">
             <header>
-               <img src="../public/hero.png" alt="hero" />
+               <img src="/hero.png" alt="hero" />
                <h1>
                   Find{" "}
                   <span className="bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent">

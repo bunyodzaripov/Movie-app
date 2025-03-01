@@ -7,7 +7,7 @@ const Index = ({
             src={
                poster_path
                   ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                  : "/public/no-movie.png"
+                  : "/no-movie.png"
             }
             alt={title}
          />
@@ -16,7 +16,7 @@ const Index = ({
 
             <div className="content">
                <div className="rating">
-                  <img src="../../public/star.svg" alt="star" />
+                  <img src="/star.svg" alt="star" />
                   <p>{vote_average ? vote_average.toFixed(1) : "N/A"}</p>
                </div>
 
