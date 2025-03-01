@@ -20,14 +20,15 @@ const App = () => {
 
    const fetchMovies = async (query: string) => {
       try {
-         const res = await fetch(
-            query
-               ? `${API_BASE_URL}/search/movie?query=${query}`
-               : `${API_BASE_URL}/discover/movie`,
-            API_OPTIONS
-         );
+         const endpoint = query
+            ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+            : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+
+         const res = await fetch(endpoint, API_OPTIONS);
+
          const data = await res.json();
-         setMovies(data.results);
+
+         setMovies(data.results || []);
       } catch (error) {
          console.error(error);
       } finally {
@@ -38,6 +39,8 @@ const App = () => {
    useEffect(() => {
       fetchMovies(searchTerm);
    }, [searchTerm]);
+
+   console.log(movies);
 
    return (
       <>
