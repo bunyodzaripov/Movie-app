@@ -5,10 +5,7 @@ import {
    faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import service from "../service";
-import Search from "../components/search";
-import MovieCard from "../components/movie-card";
-import Spinner from "../components/spinner";
-import Carousel from "../components/carousel";
+import { Carousel, MovieCard, Spinner, Search } from "../components";
 
 const Index = () => {
    const [searchTerm, setSearchTerm] = useState<string>("");
