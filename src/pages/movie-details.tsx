@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Service from "../service";
 import { Spinner } from "../components";
-import { NotFound } from "../pages";
+import { LazyNotFound } from "../pages";
 
 interface Movies {
    id: number;
@@ -53,7 +53,7 @@ const MovieDetails = () => {
          </div>
       );
 
-   if (!movie) return <NotFound />;
+   if (!movie) return <LazyNotFound />;
 
    const {
       title,

@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, MovieDetails, NotFound } from "../pages";
+import { LazyHome, LazyMovieDetails, LazyNotFound } from "../pages";
 
 const Index = () => {
    return (
       <Routes>
-         <Route path="/" element={<Home />} />
-         <Route path="/movie/:id" element={<MovieDetails />} />
-         <Route path="*" element={<NotFound />} />
+         <Route path="/" element={<LazyHome />} />
+         <Route path="/movie/:id" element={<LazyMovieDetails />} />
+         <Route path="*" element={<LazyNotFound />} />
       </Routes>
    );
 };
