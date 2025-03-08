@@ -23,7 +23,7 @@ const Index = () => {
 
    return (
       <div className="container mx-auto my-10 relative">
-         <h2 className="mb-6 text-2xl font-bold text-center sm:text-left">
+         <h2 className="text-white sm:text-3xl mb-6 text-2xl font-bold text-center sm:text-left">
             Trending Movies
          </h2>
          <Swiper
@@ -31,7 +31,7 @@ const Index = () => {
             spaceBetween={20}
             slidesPerView={1}
             loop={true}
-            autoplay={{ delay: 2500 }}
+            autoplay={{ delay: 1500 }}
             pagination={{ clickable: true }}
             navigation={true}
             breakpoints={{

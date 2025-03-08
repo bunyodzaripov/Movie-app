@@ -16,6 +16,7 @@ interface Movies {
    revenue: number;
    videos: any;
    runtime: number;
+   vote_count: number;
 }
 
 const MovieDetails = () => {
@@ -49,52 +50,72 @@ const MovieDetails = () => {
 
    if (!movie) return <NotFound />;
 
+   const {
+      title,
+      release_date,
+      poster_path,
+      runtime,
+      vote_count,
+      vote_average,
+   } = movie;
+
    const trailer = movie.videos?.results.find(
       (vid: any) => vid.type === "Trailer"
    );
 
    return (
-      <div className="max-w-6xl mx-auto p-6 text-white">
-         <h1 className="text-4xl font-bold mb-4 ">{movie.title}</h1>
-         <div className="flex flex-col md:flex-row gap-6">
-            <img
-               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-               alt={movie.title}
-               className="rounded-lg shadow-lg w-full md:w-1/3"
-            />
-            <div className="flex-1">
-               {trailer ? (
-                  <iframe
-                     src={`https://www.youtube.com/embed/${trailer.key}`}
-                     title="Movie Trailer"
-                     className="w-full h-64 md:h-80 rounded-lg"
-                     allowFullScreen
-                  ></iframe>
-               ) : (
-                  <div className="w-full h-64 md:h-80 flex justify-center items-center bg-gray-800 rounded-lg">
-                     <p className="text-gray-400 text-lg">🎥 Video not found</p>
-                  </div>
-               )}
-
-               <p className="mt-4 text-gray-400">{movie.overview}</p>
-               <div className="mt-4 flex gap-2 flex-wrap">
-                  {movie.genres.map((genre) => (
-                     <span
-                        key={genre.id}
-                        className="bg-purple-700 px-3 py-1 rounded-full text-sm"
-                     >
-                        {genre.name}
+      <div className="max-w-7xl mx-auto p-6 text-white">
+         <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+               <div>
+                  <h1 className="text-3xl sm:text-4xl font-bold mb-4 ">
+                     {title}
+                  </h1>
+                  <div className="flex flex-col sm:flex-row sm:gap-2 sm:items-center">
+                     <p className="text-[#A8B5DB]">{release_date}</p>
+                     <span className="hidden sm:block text-sm text-gray-100">
+                        •
                      </span>
-                  ))}
+                     <p className="text-[#A8B5DB]">
+                        {Math.floor(movie.runtime / 60)}h {runtime % 60}
+                        min
+                     </p>
+                  </div>
                </div>
-               <p className="mt-4">⭐ {movie.vote_average} / 10</p>
-               <p className="mt-2">🎬 Release Date: {movie.release_date}</p>
-               <p className="mt-2">
-                  💰 Budget: ${movie.budget?.toLocaleString()}
-               </p>
-               <p className="mt-2">
-                  💵 Revenue: ${movie.revenue?.toLocaleString()}
-               </p>
+               <div className="flex flex-col sm:flex-row sm:gap-1 sm:items-center bg-[#221F3D] py-2 px-4 rounded-lg">
+                  <p className="font-bold ">
+                     ⭐{vote_average.toFixed(1)}
+                     <span className="text-[#A8B5DB] font-medium">/10</span>
+                  </p>
+                  <p className="text-[#A8B5DB]">({vote_count})</p>
+               </div>
+            </div>
+            <div className="flex flex-col md:flex-row gap-6">
+               <img
+                  src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                  alt={title}
+                  className="rounded-lg md:w-[30%] h-auto object-cover "
+               />
+               <div className="md:w-[70%] ">
+                  {trailer ? (
+                     <iframe
+                        className="w-full h-140 rounded-lg"
+                        src={`https://www.youtube.com/embed/${trailer.key}`}
+                        title="Movie Trailer"
+                        allowFullScreen
+                     ></iframe>
+                  ) : (
+                     <div className="w-full h-140 rounded-lg flex justify-center items-center bg-gray-800">
+                        <p className="text-gray-400 text-lg">
+                           🎥 Video not found
+                        </p>
+                     </div>
+                  )}
+               </div>
+            </div>
+            <div className="mt-6 flex flex-col ">
+               <h2 className="text-2xl font-bold">Overview</h2>
+               <p className="text-[#A8B5DB] mt-2">{movie.overview}</p>
             </div>
          </div>
       </div>

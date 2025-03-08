@@ -43,9 +43,13 @@ const Index = () => {
          <div className="bg-hero-pattern inset-0 bg-center bg-cover absolute z-0"></div>
 
          <div className=" max-w-7xl mx-auto px-5 py-12 flex flex-col relative z-10 xs:p-10 ">
-            <header>
-               <img src="/hero.png" alt="hero" />
-               <h1>
+            <header className="sm:mt-10 mt-5">
+               <img
+                  className="w-full max-w-lg h-auto object-contain mx-auto drop-shadow-md"
+                  src="/hero.png"
+                  alt="hero"
+               />
+               <h1 className="mx-auto max-w-4xl text-center text-5xl font-bold leading-tight tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px]">
                   Find{" "}
                   <span className="bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent">
                      Movies
@@ -58,7 +62,9 @@ const Index = () => {
             <Carousel />
 
             <section className="space-y-9">
-               <h2 className="mt-[40px]">All Movies</h2>
+               <h2 className="text-2xl font-bold text-white sm:text-3xl mt-[40px]">
+                  All Movies
+               </h2>
 
                {isLoading ? (
                   <Spinner />

@@ -15,17 +15,20 @@ const Index = ({
          to={`/movie/${id}`}
          className="block hover:scale-102 transition-transform"
       >
-         <div className="bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10">
-            <img
-               className="rounded-lg h-96 w-full object-cover"
-               src={
-                  poster_path
-                     ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                     : "/no-movie.png"
-               }
-               alt={title}
-            />
-            <div className="mt-4">
+         <div className="bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10 flex flex-col h-full min-w-[180px]">
+            <div className="w-full">
+               <img
+                  className="w-full h-72 sm:h-80 rounded-lg object-cover aspect-[2/3]"
+                  src={
+                     poster_path
+                        ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                        : "/no-movie.png"
+                  }
+                  alt={title}
+               />
+            </div>
+
+            <div className="mt-4 flex flex-col flex-grow">
                <h3 className="text-white font-bold text-base line-clamp-1">
                   {title}
                </h3>
