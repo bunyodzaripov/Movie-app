@@ -40,9 +40,9 @@ const Index = () => {
 
    return (
       <>
-         <div className="pattern"></div>
+         <div className="bg-hero-pattern w-screen h-screen bg-center bg-cover absolute z-0"></div>
 
-         <div className="wrapper">
+         <div className="px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10">
             <header>
                <img src="/hero.png" alt="hero" />
                <h1>

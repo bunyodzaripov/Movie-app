@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 import "swiper/swiper-bundle.css";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import service from "../service";
@@ -44,14 +45,19 @@ const Index = () => {
          >
             {movies.map((movie) => (
                <SwiperSlide key={movie.id} className="relative group">
-                  <img
-                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                     alt={movie.title}
-                     className="rounded-lg shadow-lg w-full h-auto object-cover transition-transform group-hover:scale-105"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-center p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                     {movie.title}
-                  </div>
+                  <Link
+                     to={`/movie/${movie.id}`}
+                     className="block hover:scale-105 transition-transform"
+                  >
+                     <img
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        alt={movie.title}
+                        className="rounded-lg shadow-lg w-full h-auto object-cover transition-transform group-hover:scale-105"
+                     />
+                     <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-center p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                        {movie.title}
+                     </div>
+                  </Link>
                </SwiperSlide>
             ))}
          </Swiper>
