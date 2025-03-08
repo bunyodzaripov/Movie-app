@@ -21,6 +21,7 @@ interface Movies {
    tagline: string;
    production_countries: { name: string }[];
    production_companies: { name: string }[];
+   backdrop_path: string;
 }
 
 const MovieDetails = () => {
@@ -58,6 +59,7 @@ const MovieDetails = () => {
       title,
       release_date,
       poster_path,
+      backdrop_path,
       runtime,
       vote_count,
       vote_average,
@@ -76,112 +78,128 @@ const MovieDetails = () => {
    );
 
    return (
-      <div className="max-w-7xl min-h-screen mx-auto p-6 text-white bg-[#0F0D23]">
-         <div className="flex flex-col gap-6">
-            <div className="flex justify-between items-center">
-               <div>
-                  <h1 className="text-3xl sm:text-4xl font-bold mb-4 ">
-                     {title}
-                  </h1>
-                  <div className="flex flex-col sm:flex-row sm:gap-2 sm:items-center">
-                     <p className="text-[#A8B5DB]">{release_date}</p>
-                     <span className="hidden sm:block text-sm text-gray-100">
-                        •
-                     </span>
-                     <p className="text-[#A8B5DB]">
-                        {Math.floor(movie.runtime / 60)}h {runtime % 60}
-                        min
-                     </p>
-                  </div>
-               </div>
-               <div className="flex flex-col sm:flex-row sm:gap-1 sm:items-center bg-[#221F3D] py-2 px-4 rounded-lg">
-                  <p className="font-bold ">
-                     ⭐{vote_average.toFixed(1)}
-                     <span className="text-[#A8B5DB] font-medium">/10</span>
-                  </p>
-                  <p className="text-[#A8B5DB]">({vote_count})</p>
-               </div>
-            </div>
-            <div className="flex flex-col md:flex-row gap-6">
-               <img
-                  src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                  alt={title}
-                  className="rounded-lg md:w-[30%] h-auto object-cover "
-               />
-               <div className="md:w-[70%] ">
-                  {trailer ? (
-                     <iframe
-                        className="w-full h-140 rounded-lg"
-                        src={`https://www.youtube.com/embed/${trailer.key}`}
-                        title="Movie Trailer"
-                        allowFullScreen
-                     ></iframe>
-                  ) : (
-                     <div className="w-full h-140 rounded-lg flex justify-center items-center bg-gray-800">
-                        <p className="text-gray-400 text-lg">
-                           🎥 Video not found
+      <div className="relative w-full min-h-screen">
+         {/* Background Image */}
+         <div
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{
+               backgroundImage: `url(${`https://image.tmdb.org/t/p/original${backdrop_path}`})`,
+               backgroundSize: "cover",
+               backgroundPosition: "center",
+               backgroundRepeat: "no-repeat",
+               height: "100%",
+               width: "100%",
+            }}
+         ></div>
+
+         {/* Main Content */}
+         <div className="max-w-7xl min-h-screen relative z-10 mx-auto p-6 text-white bg-[#0f0d23bd]">
+            <div className="flex flex-col gap-6">
+               <div className="flex justify-between items-center">
+                  <div>
+                     <h1 className="text-3xl sm:text-4xl font-bold mb-4 ">
+                        {title}
+                     </h1>
+                     <div className="flex flex-col sm:flex-row sm:gap-2 sm:items-center">
+                        <p className="text-[#A8B5DB]">{release_date}</p>
+                        <span className="hidden sm:block text-sm text-gray-100">
+                           •
+                        </span>
+                        <p className="text-[#A8B5DB]">
+                           {Math.floor(movie.runtime / 60)}h {runtime % 60}
+                           min
                         </p>
                      </div>
-                  )}
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:gap-1 sm:items-center bg-[#221F3D] py-2 px-4 rounded-lg">
+                     <p className="font-bold ">
+                        ⭐{vote_average.toFixed(1)}
+                        <span className="text-[#A8B5DB] font-medium">/10</span>
+                     </p>
+                     <p className="text-[#A8B5DB]">({vote_count})</p>
+                  </div>
                </div>
+               <div className="flex flex-col md:flex-row gap-6">
+                  <img
+                     src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                     alt={title}
+                     className="rounded-lg md:w-[30%] h-auto object-cover "
+                  />
+                  <div className="md:w-[70%] ">
+                     {trailer ? (
+                        <iframe
+                           className="w-full h-140 rounded-lg"
+                           src={`https://www.youtube.com/embed/${trailer.key}`}
+                           title="Movie Trailer"
+                           allowFullScreen
+                        ></iframe>
+                     ) : (
+                        <div className="w-full h-140 rounded-lg flex justify-center items-center bg-gray-800">
+                           <p className="text-gray-400 text-lg">
+                              🎥 Video not found
+                           </p>
+                        </div>
+                     )}
+                  </div>
+               </div>
+               <table className="w-full border-collapse mt-6">
+                  <tbody>
+                     {[
+                        {
+                           label: "Genres",
+                           value: (
+                              <div className="flex flex-wrap gap-2">
+                                 {genres.map((genre: any, index: number) => (
+                                    <span
+                                       key={index}
+                                       className="bg-[#221F3D] text-white px-4 py-1 rounded-md text-sm"
+                                    >
+                                       {genre.name}
+                                    </span>
+                                 ))}
+                              </div>
+                           ),
+                        },
+                        { label: "Overview", value: overview },
+                        {
+                           label: "Release Date",
+                           value: release_date.split("-").reverse().join("/"),
+                        },
+                        {
+                           label: "Countries",
+                           value: production_countries
+                              .map((c: any) => c.name)
+                              .join(" • "),
+                        },
+                        { label: "Status", value: status },
+                        {
+                           label: "Budget",
+                           value: `$${budget?.toLocaleString() || "N/A"}`,
+                        },
+                        {
+                           label: "Revenue",
+                           value: `$${revenue?.toLocaleString() || "N/A"}`,
+                        },
+                        { label: "Tagline", value: tagline || "N/A" },
+                        {
+                           label: "Production Companies",
+                           value: production_companies
+                              .map((p: any) => p.name)
+                              .join(" • "),
+                        },
+                     ].map((item, index) => (
+                        <tr key={index} className=" flex flex-col md:table-row">
+                           <td className="text-[#A8B5DB] text-[18px] py-3 pr-6 font-semibold md:w-1/3">
+                              {item.label}
+                           </td>
+                           <td className="text-[#D6C7FF] text-sm md:text-base">
+                              {item.value || "N/A"}
+                           </td>
+                        </tr>
+                     ))}
+                  </tbody>
+               </table>
             </div>
-            <table className="w-full border-collapse mt-6">
-               <tbody>
-                  {[
-                     {
-                        label: "Genres",
-                        value: (
-                           <div className="flex flex-wrap gap-2">
-                              {genres.map((genre: any, index: number) => (
-                                 <span
-                                    key={index}
-                                    className="bg-[#221F3D] text-white px-4 py-1 rounded-md text-sm"
-                                 >
-                                    {genre.name}
-                                 </span>
-                              ))}
-                           </div>
-                        ),
-                     },
-                     { label: "Overview", value: overview },
-                     {
-                        label: "Release Date",
-                        value: release_date.split("-").reverse().join("/"),
-                     },
-                     {
-                        label: "Countries",
-                        value: production_countries
-                           .map((c: any) => c.name)
-                           .join(" • "),
-                     },
-                     { label: "Status", value: status },
-                     {
-                        label: "Budget",
-                        value: `$${budget?.toLocaleString() || "N/A"}`,
-                     },
-                     {
-                        label: "Revenue",
-                        value: `$${revenue?.toLocaleString() || "N/A"}`,
-                     },
-                     { label: "Tagline", value: tagline || "N/A" },
-                     {
-                        label: "Production Companies",
-                        value: production_companies
-                           .map((p: any) => p.name)
-                           .join(" • "),
-                     },
-                  ].map((item, index) => (
-                     <tr key={index} className=" flex flex-col md:table-row">
-                        <td className="text-[#A8B5DB] text-[18px] py-3 pr-6 font-semibold md:w-1/3">
-                           {item.label}
-                        </td>
-                        <td className="text-[#D6C7FF] text-sm md:text-base">
-                           {item.value || "N/A"}
-                        </td>
-                     </tr>
-                  ))}
-               </tbody>
-            </table>
          </div>
       </div>
    );
