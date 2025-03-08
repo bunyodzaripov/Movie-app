@@ -40,7 +40,7 @@ const Index = () => {
 
    return (
       <>
-         <div className="bg-hero-pattern inset-0  bg-center bg-cover absolute z-0"></div>
+         <div className="bg-hero-pattern inset-0 bg-center bg-cover absolute z-0"></div>
 
          <div className=" max-w-7xl mx-auto px-5 py-12 flex flex-col relative z-10 xs:p-10 ">
             <header>
