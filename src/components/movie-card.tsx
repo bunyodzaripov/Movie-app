@@ -13,10 +13,11 @@ const Index = ({
    return (
       <Link
          to={`/movie/${id}`}
-         className="block hover:scale-105 transition-transform"
+         className="block hover:scale-102 transition-transform"
       >
-         <div className="movie-card">
+         <div className="bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10">
             <img
+               className="rounded-lg h-96 w-full object-cover"
                src={
                   poster_path
                      ? `https://image.tmdb.org/t/p/w500/${poster_path}`
@@ -25,21 +26,29 @@ const Index = ({
                alt={title}
             />
             <div className="mt-4">
-               <h3>{title}</h3>
+               <h3 className="text-white font-bold text-base line-clamp-1">
+                  {title}
+               </h3>
 
-               <div className="content">
-                  <div className="rating">
-                     <img src="/star.svg" alt="star" />
-                     <p>{vote_average ? vote_average.toFixed(1) : "N/A"}</p>
+               <div className="mt-2 flex flex-row items-center flex-wrap gap-2">
+                  <div className="flex flex-row items-center gap-1">
+                     <img
+                        className="size-4 object-contain"
+                        src="/star.svg"
+                        alt="star"
+                     />
+                     <p className="font-bold text-base text-white">
+                        {vote_average ? vote_average.toFixed(1) : "N/A"}
+                     </p>
                   </div>
 
-                  <span>•</span>
-                  <p className="lang">
+                  <span className="text-sm text-gray-100">•</span>
+                  <p className="capitalize text-gray-100 font-medium text-base">
                      {original_language ? original_language : "N/A"}
                   </p>
 
-                  <span>•</span>
-                  <p className="year">
+                  <span className="text-sm text-gray-100">•</span>
+                  <p className="text-gray-100 font-medium text-base">
                      {release_date ? release_date.split("-")[0] : "N/A"}
                   </p>
                </div>
