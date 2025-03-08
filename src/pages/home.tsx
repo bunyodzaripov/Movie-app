@@ -40,9 +40,9 @@ const Index = () => {
 
    return (
       <>
-         <div className="bg-hero-pattern w-screen h-screen bg-center bg-cover absolute z-0"></div>
+         <div className="bg-hero-pattern inset-0  bg-center bg-cover absolute z-0"></div>
 
-         <div className="px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10">
+         <div className=" max-w-7xl mx-auto px-5 py-12 flex flex-col relative z-10 xs:p-10 ">
             <header>
                <img src="/hero.png" alt="hero" />
                <h1>
@@ -57,13 +57,13 @@ const Index = () => {
 
             <Carousel />
 
-            <section className="all-movies">
+            <section className="space-y-9">
                <h2 className="mt-[40px]">All Movies</h2>
 
                {isLoading ? (
                   <Spinner />
                ) : (
-                  <ul>
+                  <ul className="grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                      {movies.map((movie: any) => (
                         <MovieCard key={movie.id} movie={movie} />
                      ))}
