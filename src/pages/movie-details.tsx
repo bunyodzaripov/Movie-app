@@ -17,6 +17,10 @@ interface Movies {
    videos: any;
    runtime: number;
    vote_count: number;
+   status: string;
+   tagline: string;
+   production_countries: { name: string }[];
+   production_companies: { name: string }[];
 }
 
 const MovieDetails = () => {
@@ -57,6 +61,14 @@ const MovieDetails = () => {
       runtime,
       vote_count,
       vote_average,
+      genres,
+      overview,
+      budget,
+      revenue,
+      status,
+      tagline,
+      production_countries,
+      production_companies,
    } = movie;
 
    const trailer = movie.videos?.results.find(
@@ -64,7 +76,7 @@ const MovieDetails = () => {
    );
 
    return (
-      <div className="max-w-7xl mx-auto p-6 text-white">
+      <div className="max-w-7xl min-h-screen mx-auto p-6 text-white bg-[#0F0D23]">
          <div className="flex flex-col gap-6">
             <div className="flex justify-between items-center">
                <div>
@@ -113,10 +125,63 @@ const MovieDetails = () => {
                   )}
                </div>
             </div>
-            <div className="mt-6 flex flex-col ">
-               <h2 className="text-2xl font-bold">Overview</h2>
-               <p className="text-[#A8B5DB] mt-2">{movie.overview}</p>
-            </div>
+            <table className="w-full border-collapse mt-6">
+               <tbody>
+                  {[
+                     {
+                        label: "Genres",
+                        value: (
+                           <div className="flex flex-wrap gap-2">
+                              {genres.map((genre: any, index: number) => (
+                                 <span
+                                    key={index}
+                                    className="bg-[#221F3D] text-white px-4 py-1 rounded-md text-sm"
+                                 >
+                                    {genre.name}
+                                 </span>
+                              ))}
+                           </div>
+                        ),
+                     },
+                     { label: "Overview", value: overview },
+                     {
+                        label: "Release Date",
+                        value: release_date.split("-").reverse().join("/"),
+                     },
+                     {
+                        label: "Countries",
+                        value: production_countries
+                           .map((c: any) => c.name)
+                           .join(" • "),
+                     },
+                     { label: "Status", value: status },
+                     {
+                        label: "Budget",
+                        value: `$${budget?.toLocaleString() || "N/A"}`,
+                     },
+                     {
+                        label: "Revenue",
+                        value: `$${revenue?.toLocaleString() || "N/A"}`,
+                     },
+                     { label: "Tagline", value: tagline || "N/A" },
+                     {
+                        label: "Production Companies",
+                        value: production_companies
+                           .map((p: any) => p.name)
+                           .join(" • "),
+                     },
+                  ].map((item, index) => (
+                     <tr key={index} className=" flex flex-col md:table-row">
+                        <td className="text-[#A8B5DB] text-[18px] py-3 pr-6 font-semibold md:w-1/3">
+                           {item.label}
+                        </td>
+                        <td className="text-[#D6C7FF] text-sm md:text-base">
+                           {item.value || "N/A"}
+                        </td>
+                     </tr>
+                  ))}
+               </tbody>
+            </table>
          </div>
       </div>
    );
