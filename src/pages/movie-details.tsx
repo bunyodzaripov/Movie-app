@@ -36,7 +36,6 @@ const MovieDetails = () => {
                `/movie/${id}?append_to_response=videos`
             );
             setMovie(res.data);
-            console.log(res.data);
          } catch (error) {
             console.error("Error fetching movie details:", error);
          } finally {
