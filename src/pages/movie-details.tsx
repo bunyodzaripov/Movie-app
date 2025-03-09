@@ -78,20 +78,13 @@ const MovieDetails = () => {
 
    return (
       <div className="relative w-full min-h-screen">
-         {/* Background Image */}
          <div
-            className="absolute inset-0 bg-cover bg-center opacity-40"
+            className="absolute inset-0 bg-fixed bg-cover bg-center bg-no-repeat opacity-40 w-full h-full"
             style={{
-               backgroundImage: `url(${`https://image.tmdb.org/t/p/original${backdrop_path}`})`,
-               backgroundSize: "cover",
-               backgroundPosition: "center",
-               backgroundRepeat: "no-repeat",
-               height: "100%",
-               width: "100%",
+               backgroundImage: `url(https://image.tmdb.org/t/p/original${backdrop_path})`,
             }}
          ></div>
 
-         {/* Main Content */}
          <div className="max-w-7xl min-h-screen relative z-10 mx-auto p-6 text-white bg-[#0f0d23bd]">
             <div className="flex flex-col gap-6">
                <div className="flex justify-between items-center">
